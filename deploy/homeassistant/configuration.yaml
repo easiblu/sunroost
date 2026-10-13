@@ -1,0 +1,14 @@
+# Written by Sunroost's installer. Home Assistant is Sunroost's device engine: add and control devices on
+# Sunroost's Smart devices page. Sunroost keeps the long-term history, so Home Assistant keeps little.
+default_config:
+
+http:
+  # Only programs on this board (Sunroost) can reach Home Assistant.
+  server_host: 127.0.0.1
+
+recorder:
+  purge_keep_days: 3
+  commit_interval: 30
+
+logger:
+  default: warning

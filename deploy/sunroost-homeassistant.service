@@ -1,0 +1,19 @@
+[Unit]
+Description=Home Assistant (Sunroost's device engine)
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+# install.sh fills in the image and memory limit.
+Environment=HA_IMAGE=@HA_IMAGE@
+ExecStartPre=-/usr/bin/docker rm -f sunroost-homeassistant
+# Host networking for device discovery (mDNS, SSDP, DHCP); privileged + D-Bus for USB and Bluetooth sticks.
+ExecStart=/usr/bin/docker run --rm --name sunroost-homeassistant --network=host --privileged --memory=@HA_MEMORY@ \
+  -v /var/lib/sunroost-homeassistant:/config -v /etc/localtime:/etc/localtime:ro -v /run/dbus:/run/dbus:ro ${HA_IMAGE}
+ExecStop=/usr/bin/docker stop -t 30 sunroost-homeassistant
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

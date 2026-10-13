@@ -1,0 +1,19 @@
+[Unit]
+Description=Sunroost inverter monitor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=sunroost
+Group=sunroost
+SupplementaryGroups=dialout netdev
+# Port 80 (plain http://<board> URLs and the hotspot captive portal) without running as root.
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+WorkingDirectory=/opt/sunroost
+ExecStart=/usr/bin/node --disable-warning=ExperimentalWarning src/index.ts
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

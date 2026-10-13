@@ -1,0 +1,18 @@
+[Unit]
+Description=Sunroost kiosk (dashboard on the HDMI screen)
+After=sunroost.service systemd-user-sessions.service
+Wants=sunroost.service
+
+[Service]
+User=sunroost
+PAMName=login
+TTYPath=/dev/tty7
+Environment=XDG_RUNTIME_DIR=/run/user/%U
+# cage is a single-app Wayland compositor; 127.0.0.1 makes the UI switch to kiosk mode.
+ExecStartPre=/bin/sh -c 'until curl -fs http://127.0.0.1/api/auth/status >/dev/null; do sleep 2; done'
+ExecStart=/usr/bin/cage -s -- /usr/bin/chromium --kiosk --incognito --noerrdialogs --disable-translate --no-first-run --password-store=basic http://127.0.0.1/
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=graphical.target

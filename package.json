@@ -1,0 +1,51 @@
+{
+  "name": "sunroost",
+  "version": "0.1.0",
+  "description": "Local-first solar, battery and smart-home monitor and controller for Raspberry Pi and Orange Pi",
+  "keywords": [
+    "solar",
+    "inverter",
+    "battery",
+    "bms",
+    "modbus",
+    "mqtt",
+    "home-assistant",
+    "raspberry-pi",
+    "energy-monitor",
+    "off-grid"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/index.ts",
+    "dev": "node --disable-warning=ExperimentalWarning --watch-path=src src/index.ts",
+    "seed": "node --disable-warning=ExperimentalWarning scripts/seed.ts",
+    "typecheck": "tsc",
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/**/*.test.ts\"",
+    "selftest": "node --disable-warning=ExperimentalWarning scripts/selftest.ts"
+  },
+  "dependencies": {
+    "@fastify/static": "^8.2.0",
+    "@fastify/websocket": "^11.2.0",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource/exo": "^5.3.0",
+    "acme-client": "^5.4.0",
+    "aedes": "^0.51.3",
+    "fastify": "^5.4.0",
+    "htm": "^3.1.1",
+    "lucide-static": "^0.460.0",
+    "modbus-serial": "^8.0.21",
+    "mqtt": "^5.13.0",
+    "preact": "^10.29.8",
+    "serialport": "^13.0.0",
+    "uplot": "^1.6.32"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.0"
+  }
+}

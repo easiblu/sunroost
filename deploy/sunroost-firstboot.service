@@ -1,0 +1,17 @@
+# Runs once on a board flashed from a Sunroost image: the steps that depend on the board itself
+# (Home Assistant needs a 64-bit OS, 2 GB of RAM and network access to pull its image).
+# Retries every 5 minutes until it succeeds (e.g. WiFi is set up after the first boot), then disables itself.
+[Unit]
+Description=Sunroost first-boot setup
+Wants=network-online.target
+After=network-online.target docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/sunroost
+ExecStart=/opt/sunroost/deploy/install.sh --firstboot
+Restart=on-failure
+RestartSec=300
+
+[Install]
+WantedBy=multi-user.target

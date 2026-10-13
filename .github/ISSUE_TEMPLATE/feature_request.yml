@@ -1,0 +1,14 @@
+name: Feature request
+description: Suggest an improvement or a new device.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What would you like to do, and why?
+    validations:
+      required: true
+  - type: textarea
+    id: ideas
+    attributes:
+      label: Ideas for how it could work

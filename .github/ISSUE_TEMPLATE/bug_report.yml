@@ -1,0 +1,32 @@
+name: Bug report
+description: Something doesn't work as it should.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+  - type: input
+    id: version
+    attributes:
+      label: Sunroost version / image
+      placeholder: e.g. 0.1.0, rpi-arm64 image
+    validations:
+      required: true
+  - type: input
+    id: board
+    attributes:
+      label: Board
+      placeholder: e.g. Raspberry Pi 4 (4 GB)
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: "`journalctl -u sunroost -n 200`, or Configuration → Tools → Logs. Remove anything private."
+      render: text

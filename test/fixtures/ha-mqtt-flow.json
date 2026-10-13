@@ -1,0 +1,400 @@
+{
+ "step": {
+  "type": "form",
+  "flow_id": "01M4S28YBY985J9T6HKB6S4G61",
+  "handler": "mqtt",
+  "data_schema": [
+   {
+    "selector": {
+     "text": {
+      "type": "text",
+      "multiline": false,
+      "multiple": false
+     }
+    },
+    "name": "broker",
+    "required": true
+   },
+   {
+    "selector": {
+     "number": {
+      "mode": "box",
+      "min": 1,
+      "max": 65535,
+      "step": 1
+     }
+    },
+    "type": "integer",
+    "name": "port",
+    "required": true,
+    "default": 1883
+   },
+   {
+    "selector": {
+     "select": {
+      "options": [
+       "5",
+       "3.1.1",
+       "3.1"
+      ],
+      "mode": "dropdown",
+      "multiple": false,
+      "custom_value": false,
+      "sort": false
+     }
+    },
+    "name": "protocol",
+    "required": true,
+    "default": "5"
+   },
+   {
+    "selector": {
+     "text": {
+      "type": "text",
+      "multiline": false,
+      "multiple": false
+     }
+    },
+    "name": "username",
+    "required": false,
+    "optional": true
+   },
+   {
+    "selector": {
+     "text": {
+      "type": "password",
+      "multiline": false,
+      "multiple": false
+     }
+    },
+    "name": "password",
+    "required": false,
+    "optional": true
+   },
+   {
+    "type": "expandable",
+    "schema": [
+     {
+      "selector": {
+       "text": {
+        "type": "text",
+        "multiline": false,
+        "multiple": false
+       }
+      },
+      "name": "client_id",
+      "required": false,
+      "optional": true
+     },
+     {
+      "selector": {
+       "number": {
+        "mode": "box",
+        "min": 15,
+        "step": "any",
+        "unit_of_measurement": "sec"
+       }
+      },
+      "type": "integer",
+      "name": "keepalive",
+      "required": false,
+      "optional": true
+     },
+     {
+      "selector": {
+       "boolean": {}
+      },
+      "name": "set_client_cert",
+      "required": true
+     },
+     {
+      "selector": {
+       "file": {
+        "accept": ".pem,.crt,.cer,.der,application/x-x509-user-cert"
+       }
+      },
+      "name": "client_cert",
+      "required": false,
+      "optional": true
+     },
+     {
+      "selector": {
+       "file": {
+        "accept": ".pem,.key,.der,.pk8,application/pkcs8"
+       }
+      },
+      "name": "client_key",
+      "required": false,
+      "optional": true
+     },
+     {
+      "selector": {
+       "text": {
+        "type": "password",
+        "multiline": false,
+        "multiple": false
+       }
+      },
+      "name": "client_key_password",
+      "required": false,
+      "optional": true
+     },
+     {
+      "selector": {
+       "select": {
+        "options": [
+         "off",
+         "auto",
+         "custom"
+        ],
+        "mode": "dropdown",
+        "translation_key": "set_ca_cert",
+        "multiple": false,
+        "custom_value": false,
+        "sort": false
+       }
+      },
+      "name": "set_ca_cert",
+      "required": true
+     },
+     {
+      "selector": {
+       "file": {
+        "accept": ".pem,.crt,.cer,.der,application/x-x509-ca-cert"
+       }
+      },
+      "name": "certificate",
+      "required": false,
+      "optional": true
+     },
+     {
+      "selector": {
+       "boolean": {}
+      },
+      "name": "tls_insecure",
+      "required": false,
+      "optional": true
+     },
+     {
+      "selector": {
+       "select": {
+        "options": [
+         {
+          "value": "tcp",
+          "label": "TCP"
+         },
+         {
+          "value": "websockets",
+          "label": "WebSocket"
+         }
+        ],
+        "mode": "dropdown",
+        "multiple": false,
+        "custom_value": false,
+        "sort": false
+       }
+      },
+      "name": "transport",
+      "required": true,
+      "default": "tcp"
+     },
+     {
+      "selector": {
+       "text": {
+        "type": "text",
+        "multiline": false,
+        "multiple": false
+       }
+      },
+      "name": "ws_path",
+      "required": false,
+      "optional": true
+     },
+     {
+      "selector": {
+       "text": {
+        "type": "text",
+        "multiline": true,
+        "multiple": false
+       }
+      },
+      "name": "ws_headers",
+      "required": false,
+      "optional": true
+     }
+    ],
+    "expanded": false,
+    "name": "other_settings",
+    "required": true
+   }
+  ],
+  "errors": {},
+  "description_placeholders": null,
+  "last_step": null,
+  "preview": null,
+  "step_id": "broker"
+ },
+ "translations": {
+  "component.mqtt.config.error.bad_birth": "Invalid birth topic",
+  "component.mqtt.config.error.bad_certificate": "The CA certificate is invalid",
+  "component.mqtt.config.error.bad_client_cert": "Invalid client certificate, ensure a valid file is supplied",
+  "component.mqtt.config.error.bad_client_cert_key": "Client certificate and private key are not a valid pair",
+  "component.mqtt.config.error.bad_discovery_prefix": "Invalid discovery prefix",
+  "component.mqtt.config.error.bad_will": "Invalid will topic",
+  "component.mqtt.config.error.bad_ws_headers": "Supply valid HTTP headers as a JSON object",
+  "component.mqtt.config.error.cannot_connect": "Failed to connect",
+  "component.mqtt.config.error.client_key_error": "Invalid private key file or invalid password supplied",
+  "component.mqtt.config.error.invalid_auth": "Invalid authentication",
+  "component.mqtt.config.error.invalid_inclusion": "The client certificate and private key must be configured together",
+  "component.mqtt.config.step.broker.data.broker": "Broker",
+  "component.mqtt.config.step.broker.data.password": "Password",
+  "component.mqtt.config.step.broker.data.port": "Port",
+  "component.mqtt.config.step.broker.data.protocol": "MQTT protocol",
+  "component.mqtt.config.step.broker.data.username": "Username",
+  "component.mqtt.config.step.broker.data_description.broker": "The hostname or IP address of your MQTT broker.",
+  "component.mqtt.config.step.broker.data_description.password": "The password to log in to your MQTT broker.",
+  "component.mqtt.config.step.broker.data_description.port": "The port your MQTT broker listens to. For example 1883.",
+  "component.mqtt.config.step.broker.data_description.protocol": "The MQTT protocol version that is used. Note that Home Assistant will silently change to version 5 if your broker supports it.",
+  "component.mqtt.config.step.broker.data_description.username": "The username to log in to your MQTT broker.",
+  "component.mqtt.config.step.broker.description": "Please enter the connection information of your MQTT broker.",
+  "component.mqtt.config.step.broker.sections.other_settings.data.certificate": "Upload custom CA certificate file",
+  "component.mqtt.config.step.broker.sections.other_settings.data.client_cert": "Upload client certificate file",
+  "component.mqtt.config.step.broker.sections.other_settings.data.client_id": "Client ID (leave empty for a randomly generated one)",
+  "component.mqtt.config.step.broker.sections.other_settings.data.client_key": "Upload private key file",
+  "component.mqtt.config.step.broker.sections.other_settings.data.client_key_password": "Password",
+  "component.mqtt.config.step.broker.sections.other_settings.data.keepalive": "The time between sending keep alive messages",
+  "component.mqtt.config.step.broker.sections.other_settings.data.set_ca_cert": "Broker certificate validation",
+  "component.mqtt.config.step.broker.sections.other_settings.data.set_client_cert": "Use a client certificate",
+  "component.mqtt.config.step.broker.sections.other_settings.data.tls_insecure": "Ignore broker certificate validation",
+  "component.mqtt.config.step.broker.sections.other_settings.data.transport": "MQTT transport",
+  "component.mqtt.config.step.broker.sections.other_settings.data.ws_headers": "WebSocket headers in JSON format",
+  "component.mqtt.config.step.broker.sections.other_settings.data.ws_path": "WebSocket path",
+  "component.mqtt.config.step.broker.sections.other_settings.data_description.certificate": "The custom CA certificate file to validate your MQTT broker's certificate.",
+  "component.mqtt.config.step.broker.sections.other_settings.data_description.client_cert": "The client certificate to authenticate against your MQTT broker.",
+  "component.mqtt.config.step.broker.sections.other_settings.data_description.client_id": "The unique ID to identify the Home Assistant MQTT API as MQTT client. It is recommended to leave this option blank.",
+  "component.mqtt.config.step.broker.sections.other_settings.data_description.client_key": "The private key file that belongs to your client certificate.",
+  "component.mqtt.config.step.broker.sections.other_settings.data_description.client_key_password": "The password for the private key file (if set).",
+  "component.mqtt.config.step.broker.sections.other_settings.data_description.keepalive": "A value less than 90 seconds is advised. Defaults to 60 seconds.",
+  "component.mqtt.config.step.broker.sections.other_settings.data_description.set_ca_cert": "When already set to **Custom**, a custom CA validation certificate is configured. Select **Auto** for automatic CA validation, or upload a custom CA certificate, to allow validating your MQTT broker's certificate.",
+  "component.mqtt.config.step.broker.sections.other_settings.data_description.set_client_cert": "When already selected, client certificate authentication is enabled. Upload a client certificate and key to enable.",
+  "component.mqtt.config.step.broker.sections.other_settings.data_description.tls_insecure": "Option to ignore validation of your MQTT broker's certificate.",
+  "component.mqtt.config.step.broker.sections.other_settings.data_description.transport": "The transport to be used for the connection to your MQTT broker.",
+  "component.mqtt.config.step.broker.sections.other_settings.data_description.ws_headers": "The WebSocket headers to pass through the WebSocket-based connection to your MQTT broker.",
+  "component.mqtt.config.step.broker.sections.other_settings.data_description.ws_path": "The WebSocket path to be used for the connection to your MQTT broker.",
+  "component.mqtt.config.step.broker.sections.other_settings.name": "Other settings"
+ },
+ "descriptions": {
+  "core": {
+   "integration": {
+    "shelly": {
+     "name": "shelly",
+     "integrations": {
+      "shelly": {
+       "integration_type": "device",
+       "config_flow": true,
+       "iot_class": "local_push",
+       "name": "Shelly"
+      }
+     },
+     "iot_standards": [
+      "zwave"
+     ]
+    },
+    "philips": {
+     "name": "Philips",
+     "integrations": {
+      "dynalite": {
+       "integration_type": "hub",
+       "config_flow": true,
+       "iot_class": "local_push",
+       "name": "Philips Dynalite"
+      },
+      "hue": {
+       "integration_type": "hub",
+       "config_flow": true,
+       "iot_class": "local_push",
+       "name": "Philips Hue"
+      },
+      "hue_ble": {
+       "integration_type": "device",
+       "config_flow": true,
+       "iot_class": "local_push",
+       "name": "Philips Hue BLE"
+      },
+      "philips_js": {
+       "integration_type": "device",
+       "config_flow": true,
+       "iot_class": "local_polling",
+       "name": "Philips TV"
+      }
+     }
+    },
+    "mqtt": {
+     "name": "MQTT",
+     "integrations": {
+      "manual_mqtt": {
+       "integration_type": "hub",
+       "config_flow": false,
+       "iot_class": "local_push",
+       "name": "Manual MQTT alarm control panel"
+      },
+      "mqtt": {
+       "integration_type": "service",
+       "config_flow": true,
+       "iot_class": "local_push",
+       "name": "MQTT"
+      },
+      "mqtt_eventstream": {
+       "integration_type": "hub",
+       "config_flow": false,
+       "iot_class": "local_polling",
+       "name": "MQTT Eventstream"
+      },
+      "mqtt_json": {
+       "integration_type": "hub",
+       "config_flow": false,
+       "iot_class": "local_push",
+       "name": "MQTT JSON"
+      },
+      "mqtt_room": {
+       "integration_type": "hub",
+       "config_flow": false,
+       "iot_class": "local_push",
+       "name": "MQTT room presence"
+      },
+      "mqtt_statestream": {
+       "integration_type": "hub",
+       "config_flow": false,
+       "iot_class": "local_push",
+       "name": "MQTT Statestream"
+      }
+     }
+    },
+    "esphome": {
+     "name": "ESPHome",
+     "integration_type": "device",
+     "config_flow": true,
+     "iot_class": "local_push"
+    },
+    "sun": {
+     "integration_type": "service",
+     "config_flow": true,
+     "iot_class": "calculated",
+     "single_config_entry": true
+    },
+    "tasmota": {
+     "name": "Tasmota",
+     "integration_type": "hub",
+     "config_flow": true,
+     "iot_class": "local_push"
+    },
+    "demo": {
+     "integration_type": "hub",
+     "config_flow": false,
+     "iot_class": "calculated",
+     "single_config_entry": true
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,11 @@
+node_modules/
+data/
+config.json
+original product/
+data-sim/
+.DS_Store
+private/
+# Duplicate copies created by Finder/iCloud sync
+* 2.*
+dist/
+.image-cache/

@@ -1,0 +1,35 @@
+name: Hardware report (inverter / battery)
+description: Tested Sunroost with a real inverter or battery? Tell us what worked and what didn't.
+labels: [hardware-report]
+body:
+  - type: input
+    id: device
+    attributes:
+      label: Brand and exact model
+      placeholder: e.g. Growatt SPF 5000ES
+    validations:
+      required: true
+  - type: input
+    id: driver
+    attributes:
+      label: Driver and model chosen in Sunroost (or what Auto-detect said)
+  - type: dropdown
+    id: connection
+    attributes:
+      label: Connection
+      options: [USB cable, RS485 adapter, RS232 adapter, Modbus TCP gateway, Solarman WiFi stick, Luxpower dongle, GoodWe dongle, Eybond / SmartESS dongle, CAN, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: readings
+    attributes:
+      label: Readings compared with the inverter's display
+      description: A few values side by side (PV power, battery %, battery power and its sign, grid power and its sign, load).
+    validations:
+      required: true
+  - type: textarea
+    id: registers
+    attributes:
+      label: Register dump or console output (optional)
+      description: From Configuration → Tools → Modbus console / Inverter console.
+      render: text

@@ -1,0 +1,45 @@
+name: SD-card images
+# Builds the flashable images and attaches them to the GitHub release.
+# Runs when a release is published, or by hand (Actions → SD-card images → Run workflow).
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  image:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { target: rpi-arm64, runner: ubuntu-24.04-arm }
+          - { target: orangepi3-lts, runner: ubuntu-24.04-arm }
+          - { target: rpi-armhf, runner: ubuntu-latest }
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static binfmt-support fdisk e2fsprogs dosfstools zerofree xz-utils rsync
+      - name: Version
+        run: |
+          V=${GITHUB_REF_NAME#v}
+          [[ "${{ github.event_name }}" == release ]] || V=$(node -p 'require("./package.json").version')-dev.${GITHUB_RUN_NUMBER}
+          echo "VERSION=$V" >> "$GITHUB_ENV"
+      - name: Build
+        run: sudo -E env "PATH=$PATH" image/build.sh ${{ matrix.target }} dist
+      - name: Upload to the release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" dist/*.img.xz dist/*.sha256 --clobber
+      - name: Keep as a workflow artifact
+        if: github.event_name != 'release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: sunroost-${{ matrix.target }}
+          path: dist/
+          retention-days: 7
