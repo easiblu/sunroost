@@ -37,7 +37,7 @@
     "aedes": "^0.51.3",
     "fastify": "^5.4.0",
     "htm": "^3.1.1",
-    "lucide-static": "^0.460.0",
+    "lucide-static": "^1.55.0",
     "modbus-serial": "^8.0.21",
     "mqtt": "^5.13.0",
     "preact": "^10.29.8",
