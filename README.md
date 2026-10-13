@@ -54,13 +54,89 @@ the download. Images are built by `image/build.sh` (see `image/README.md`).
 
 ## Supported hardware
 
-**Inverters:** 23 protocol drivers covering 190+ series from 60 brands, including Deye / SunSynk / Sol-Ark, Growatt,
-Voltronic / Axpert / MPP Solar / EASUN, SRNE, Luxpower / EG4, Sumry and its rebrands, MUST, Megarevo / INVT, Felicity,
-Solis, GoodWe, Huawei, Sungrow, Victron (GX), Sigenergy, Senergy / Duracell, Solax, Livoltek, Afore and MidNite. Connect by
-USB, RS232/RS485, Modbus TCP, or the inverter's WiFi stick (Solarman, Luxpower, GoodWe, Eybond/SmartESS). Pick your
-brand and series in **Configuration → Devices**, or press **Auto-detect**. The full list and each driver's status is in
-`docs/INVERTERS.md`.
+**Inverters:** 23 protocol drivers covering 190+ series from 60+ brands. Connect by USB, RS232/RS485, Modbus TCP, or the
+inverter's WiFi stick (Solarman, Luxpower, GoodWe, Eybond/SmartESS). Pick your brand and series in
+**Configuration → Devices**, or press **Auto-detect**. Per-series details are in `docs/INVERTERS.md`.
 
+| Status | Meaning |
+|---|---|
+| ✅ | Full driver: readings and settings |
+| 🟡 | Read-only: readings work; settings can't be changed until the driver is confirmed on real hardware |
+| 🔍 | Protocol unknown for this series: use **Auto-detect** |
+| ❌ | No driver yet |
+
+Where a brand mixes statuses, each series is marked. No driver has been confirmed on real hardware yet, so compare the
+first readings with the inverter's own display.
+
+| Brand | Series | Driver | Connection | Status |
+|---|---|---|---|---|
+| Afore | AF-SL Single-Phase Hybrid, AF-TH Three-Phase Hybrid | `afore` | Solarman, RS485 | 🟡 |
+| Amensolar | N3H-X10 Split-Phase Hybrid | `megarevo` | — | 🟡 |
+| AMIBA | AN-Series Hybrid | auto-detect | RS232, WiFi stick | 🔍 |
+| Anenji | All-In-One Solar Charge, ANJ Hybrid 24V, ANJ Hybrid 48V, ANJ Hybrid Off-Grid/On-Grid WIFI, ANJ-HHS Hybrid 48V, GES-500 Hybrid | `sumry` | RS485, USB, WiFi stick, RS232 | 🟡 |
+| Anern | AN-FGI Series 🔍, AN-PV Multi MPPT ✅, AN-SCI-EVO Series Solar 🔍, ECO AN-SCI-EVO Hybrid 🟡 | `voltronic`, `sumry` | USB, RS232, WiFi stick | ✅ 🟡 🔍 |
+| Busbyr | GES Split-Phase Hybrid | `sumry` | RS485, USB, WiFi stick | 🟡 |
+| CHISAGE ESS | Mars G2 Three-Phase Hybrid | auto-detect | RS485 | 🔍 |
+| Conderenergy | KVA Hybrid 🔍, S-Series Hybrid 🟡 | `sumry` | RS232, WiFi stick | 🟡 🔍 |
+| Datouboss | DT4811B Hybrid ✅, DT4855U Hybrid ✅, JC series All-In-One Hybrid inverters with LiFePO4 battery 🔍 | `voltronic` | RS232, USB | ✅ 🔍 |
+| Daxtromn | AGH Hybrid series 🟡, AGH PRO 🔍 | `sumry` | RS232, WiFi stick | 🟡 🔍 |
+| Deye | OG01LP1 Single-Phase Off-Grid, SG01HP3 Three-Phase Hybrid, SG01LP1 Single-Phase Hybrid, SG02HP3 Three-Phase Hybrid High Voltage, SG02LP1 Single-Phase Hybrid, SG04LP1 Single-Phase Hybrid, SG04LP3 Three-Phase Hybrid, SG05LP1 Single-Phase Hybrid, SG05LP3 Three-Phase Hybrid | `sunsynk` | RS232, RS485, Solarman | ✅ |
+| Duracell | Dura-i G1 Hybrid, Dura-i G3 | `senergy` | RS485 | 🟡 |
+| Dyness | 1P-A series | `solis` | RS485, WiFi stick | 🟡 |
+| Easun Power | Easun Isolar SMX II 🟡, IGrid-SGR Hybrid with WiFi 🟡, ISolar MLV-U 🟡, ISolar SMG II 🟡, ISolar SMG II Off-Grid 3 Phase WiFi 🟡, ISolar SMG III WIFI 🟡, ISolar SMH III 🟡, ISolar SML-V WIFI 🟡, Isolar SMP Off-Grid ✅, ISolar SMS W-E 🟡, ISolar-SMT Off-Grid Hybrid ✅ | `srne`, `sumry`, `voltronic` | RS485, USB, WiFi stick, RS232 | ✅ 🟡 |
+| Eco-worthy | ECO Split-Phase Off-Grid 🟡, ECO-INV Split-Phase AIO 🔍, SPI Hybrid series 🟡 | `srne` | RS232, WiFi stick, RS485, USB | 🟡 🔍 |
+| Effekta | AX M1 Series | `voltronic` | RS232, USB | ✅ |
+| EG4 | 3000EHV-48 All-In-One Off-Grid 🟡, 6500EX Off-grid ✅, FlexBOSS 21 Split-Phase All-In-One Hybrid 🟡, GridBOSS ❌, IV-6000-XP-IN All-In-One Off-Grid 🟡, IV-HYB-AW All-In-One Hybrid 🟡, IV-XP-IN 🟡 | `sumry`, `voltronic`, `luxpower` | RS232, WiFi stick, USB, RS485 | ✅ 🟡 ❌ |
+| Felicity Solar | IVEM Hybrid, IVGM Hybrid, IVPA Off-Grid, T-Rex HP, T-REX LP1G01 Hybrid | `felicity` | RS232, RS485 | 🟡 |
+| Fronus PK | Infineon | `voltronic` | RS232, USB | ✅ |
+| GoodWe | D-ES Single-Phase Hybrid ES, EHB AU G11 Hybrid, ES-C10 Uniq Series Single-Phase Hybrid, ET G2 Series, GW-ES Split-Phase Hybrid, GW-ET Three-Phase Hybrid | `goodwe` | LAN, WiFi stick, RS485 | 🟡 |
+| Growatt | MID-TL3-XH ✅, MIN TL-XH-US ✅, MIN-TL-X ✅, MIN-TL-XH ✅, MOD-TL3-XH ✅, SPA TL-BL ✅, SPE-ES ✅, SPF-DVM-US Split-Phase Off-Grid ✅, SPF-ES ✅, SPF-ES-Plus ✅, SPH TL BL-UP ✅, SPH TL BL-US ✅, SPH TL-HU-US ✅, SPH TL3 BH-UP ✅, WIT Three-Phase Hybrid 🟡 | `growatt` | RS485, USB, LAN | ✅ 🟡 |
+| Growtech | Axpert GT, Axpert Max GT | `voltronic` | RS232 | ✅ |
+| Hanchu | HESS off-grid | `srne` | RS485, USB, WiFi stick | 🟡 |
+| Huawei | SUN2000 KTL-L1 Single-Phase Hybrid, SUN2000-KTL-M3, SUN2000-TL-M1 Three-Phase | `huawei` | — | 🟡 |
+| HumsiENK | HSINV KWSP-SGRE Hybrid | `sumry` | RS232, WiFi stick | 🟡 |
+| HZSolar | HZ Off-Grid | `sumry` | RS232, WiFi stick | 🟡 |
+| INVT | XD10KTL Hybrid | `megarevo` | RS485, Solarman | 🟡 |
+| Kodak | OG Off-Grid | `voltronic` | RS232, USB | ✅ |
+| LiveFun | GES Split-Phase Hybrid | `sumry` | RS485, USB, WiFi stick | 🟡 |
+| Livoltek | HP3, Hyper | `livoltek` | RS485, USB | 🟡 |
+| Luxpower | LXP AC Coupled, LXP-LB Hybrid, SNA Single-Phase Hybrid, SNA-US Split-Phase Hybrid | `luxpower` | RS485, WiFi stick | 🟡 |
+| LVTopSun | LV-Pro Off-Grid | `growatt` | USB | ✅ |
+| Mecer | SOL-I-AX-11M | `voltronic` | RS232, USB | ✅ |
+| Megarevo | R-KL1 Single-Phase Hybrid ESS | `megarevo` | RS485, Solarman | 🟡 |
+| MidNite Solar | Midnite Rosie ❌, MN-AIO All-In-One 🟡 | `midnite` | CAN, RS485 | 🟡 ❌ |
+| MPP Solar | MPI Hybrid, MPI Three-Phase, MPI Waterproof (IP65 Rated) WP | `voltronic` | RS232, USB | 🟡 |
+| MUST | PH11 PRO, PH11 Three-Phase Hybrid, PH18-Plus Hybrid, PV19-EXP Series, PV33 TLV Series | `must` | RS485, USB | 🟡 |
+| OPTI-Solar | SP Brilliant Ultra III Series, SP Handy Grid III Series, SP Handy II Series, SP Handy Plus II Series, SP Handy Plus Series, SP Handy Series, SP Handy Ultra Series, SP Initial Series, SP IP Grid HV ECO Series, SP IP Grid HV Series, SP IP Grid Series, SP Power One Series, SP Premium Plus Series, SP Regal Ultra Series | `voltronic` | RS232, USB | ✅ |
+| Phocos | Phocos Any-Grid | `voltronic` | RS232, USB | ✅ |
+| POWLAND | GES-500 Split-Phase Hybrid | `sumry` | RS485, USB, WiFi stick | 🟡 |
+| PowMr | HVM KP-series All-In-One ✅, HVM M-series All-In-One ✅, HVM P-series All-In-One Three-Phase ✅, LVM H-series All-In-One 🟡, POW-LVM All-In-One 48V 🟡, POW-SunSmart 🟡, POW-SunSmart Split-Phase 🟡 | `voltronic`, `srne` | RS232, WiFi stick, RS485, USB | ✅ 🟡 |
+| RCT | Axpert AXMX2, Axpert MK4 Twin | `voltronic` | RS232, USB | ✅ |
+| RUiXU | SUNON Split-Phase Off-Grid 🔍, SUNON10 Split-Phase Off-Grid 🟡 | `srne` | RS485, USB, WiFi stick | 🟡 🔍 |
+| Salvare | 10 PRO | `senergy` | RS485 | 🟡 |
+| Senergy | SE KTL-G2P Split-Phase Hybrid | `senergy` | RS485 | 🟡 |
+| Sigenergy | SigenStor EC Single-Phase Hybrid, SigenStor EC Three-Phase Hybrid | `sigenergy` | WiFi stick, LAN | 🟡 |
+| Sol-Ark | 12K-2P Hybrid, 15K-2P Hybrid, 18k-2P, 30K-3P High-Voltage, 5K-1P Hybrid | `sunsynk` | RS232, RS485, WiFi stick | ✅ |
+| Solax | X1 Lite LV | `solax` | RS485 | 🟡 |
+| Solis | RHI-HVES-5G-DC Hybrid, S5-EH1P-L Single-Phase Hybrid, S6 Hybrid, S6 Three-Phase K-H Series, S6-EH3 Solarator Series | `solis` | RS485, WiFi stick | 🟡 |
+| SRNE | ABP Split/Single-Phase Off-Grid, ASF Single-Phase Off-Grid, ASP Split-Phase Hybrid, ASP Three-Phase Off-Grid, HESP Single-Phase Hybrid, HYP Single/Split-Phase Low Voltage, SR-HF Off-Grid | `srne` | RS485, USB, WiFi stick | 🟡 |
+| Sumry | HGX, VICTOR MAX Hybrid | `sumry` | RS232, WiFi stick | 🟡 |
+| SunGoldPower | FR12K-B All-In-One Off-Grid 🟡, SGN-KHB Split-Phase Hybrid 🔍, SGS-MAX All-In-One Hybrid 🟡, SPH-80A Hybrid 🟡, SPH-P Solar Charger 🟡 | `srne` | RS485, USB, WiFi stick | 🟡 🔍 |
+| Sungrow | SG-RT Three-Phase Grid-Tied, SH-RT Three-Phase Hybrid, SH-T Three-Phase Hybrid | `sungrow` | WiFi stick, LAN, RS485 | 🟡 |
+| SunSynk | Acure Single-Phase, LIFELYNK S, X & XL SERIES, SG01HP3 3-Phase Hybrid, SG01LP1 Single-Phase Hybrid, SG02LP1 Single-Phase Hybrid, SG03LP1 Hybrid Single-Phase, SG04LP3 3-Phase Hybrid, Sunsynk Lifelynk Lynks | `sunsynk` | RS485, WiFi stick, RS232 | ✅ |
+| Synerji | SYSV Off-Grid | `must` | RS485, USB | 🟡 |
+| The Sun Pays | MPS-V MAX Duel AC output | auto-detect | RS232, WiFi stick | 🔍 |
+| Tingen | GES Split-Phase Hybrid | `sumry` | RS485, USB, WiFi stick | 🟡 |
+| Turbo Energy | 5.0 Hybrid SERIES | `sunsynk` | RS232, RS485, Solarman | ✅ |
+| Vestwoods | R8KL1NA Split-Phase Hybrid | `megarevo` | — | 🟡 |
+| Vevor | EM-24L Hybrid 🟡, EM-48L Hybrid 🔍 | `sumry` | RS232, WiFi stick | 🟡 🔍 |
+| Victron | EasySolar-II, MultiPlus-II | `victron` | GX, LAN | 🟡 |
+| Voltronic | Axpert MAX II ✅, Axpert MKS ✅, Axpert MKS II ✅, InfiniSolar 3-phase 🟡, InfiniSolar Hybrid 🟡, InfiniSolar PRE-Series Hybrid 🟡, InfiniSolar V Multiphase 🟡, InfiniSolar WP LV Hybrid 🟡, Knox Krypton Infini Max II 🟡 | `voltronic` | RS232, USB, RS485 | ✅ 🟡 |
+| WattCycle | SPHPB-SGRC Split-Phase All-In-One | auto-detect | USB | 🔍 |
+| WeVolt | WVLVS-IP54, WVLVS-IP55 | `(gospower)` | RS232 | ❌ |
+| WKS | EVO-CIRCLE Single-Phase Hybrid | `voltronic` | RS232, USB | ✅ |
+
+**Batteries and grid:**
 
 | Type | Driver | Models / notes | Link |
 |---|---|---|---|
