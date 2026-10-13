@@ -8,6 +8,10 @@ Sunroost is an independent project. It is not affiliated with or endorsed by Sol
 names are used only to say which hardware and which published APIs Sunroost works with. Inverter protocols are implemented
 from vendors' public documents and community-documented register maps (see `docs/INVERTERS.md`).
 
+<p align="center">
+  <img src="docs/screenshots/dashboard.png" alt="Sunroost dashboard: live energy flow, solar, battery and grid" width="900">
+</p>
+
 ## Features
 
 | Area | What you get |
@@ -31,6 +35,25 @@ from vendors' public documents and community-documented register maps (see `docs
 - **Safer Growatt writes.** Registers that haven't been verified are read-only, and automations rate-limit writes to protect the inverter's EEPROM.
 - **Cost and self-sufficiency on Totals**, plus CSV export and day-ahead prices.
 - A phone layout and a kiosk mode (opening `http://127.0.0.1` on the Pi's HDMI screen turns animations off).
+
+## Screenshots
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/charts.png" alt="Charts: power, battery and state of charge over 24 hours"><br><b>Charts</b>: power, battery and state of charge, drag to zoom</td>
+    <td width="50%"><img src="docs/screenshots/totals.png" alt="Totals: daily solar, consumption and grid energy for 30 days"><br><b>Totals</b>: daily, weekly, monthly and yearly energy, CSV export</td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/automations.png" alt="Automations overview with upcoming and condition-based rules"><br><b>Automations</b>: When → If → Then rules, templates, scenes and a 24-hour timeline</td>
+    <td><img src="docs/screenshots/smart-devices.png" alt="Smart devices grouped by room with power readings"><br><b>Smart devices</b>: plugs, lights, climate and EV chargers by room, with live power</td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/inverter-setup.png" alt="Inverter setup: brand and series picker, connection and auto-detect"><br><b>Inverter setup</b>: pick brand and series, or auto-detect; USB, network or WiFi stick</td>
+    <td align="center"><img src="docs/screenshots/mobile.png" alt="Dashboard on a phone" width="260"><br><b>Phone</b>: the whole UI works on a phone</td>
+  </tr>
+</table>
+
+<sub>Screenshots use the built-in simulator and demo devices.</sub>
 
 ## Download
 
