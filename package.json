@@ -40,7 +40,7 @@
     "lucide-static": "^0.460.0",
     "modbus-serial": "^8.0.21",
     "mqtt": "^5.13.0",
-    "preact": "^10.29.8",
+    "preact": "^11.0.1",
     "serialport": "^13.0.0",
     "uplot": "^1.6.32"
   },
