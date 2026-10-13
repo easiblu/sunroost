@@ -101,7 +101,11 @@ describe('ESPHome driver', () => {
     const done = await engine.flowStep(d.flowId, { key });
     assert.deepEqual([done.type, done.type === 'create_entry' && done.title], ['create_entry', 'Heat pump']);
 
-    await until('relay', () => states.get('switch.heat_pump_relay')?.state === 'off');
+    // States arrive one message at a time after setup; wait for all the ones checked below (slow CI runners lag).
+    await until('initial states', () =>
+      states.get('switch.heat_pump_relay')?.state === 'off' &&
+      states.get('sensor.heat_pump_power')?.state === '0' &&
+      states.get('climate.heat_pump')?.state === 'off');
     const dev = registry.device(registry.entity('switch.heat_pump_relay')!.deviceId!)!;
     assert.deepEqual([dev.manufacturer, dev.model, dev.swVersion], ['Espressif', 'esp32dev', 'ESPHome 2024.6.0']);
     assert.equal(registry.entity('sensor.heat_pump_power')!.unit, 'W');
@@ -176,7 +180,11 @@ describe('older firmware without encryption, with an API password', () => {
       assert.match(JSON.stringify(withKey), /doesn't use encryption/);
       const ok = await engine.flowStep(id, { host: '127.0.0.1', port: sim.port, password: 'secret' });
       assert.equal(ok.type, 'create_entry');
-      await until('relay', () => states.get('switch.heat_pump_relay')?.state === 'off');
+      // States arrive one message at a time after setup; wait for all the ones checked below (slow CI runners lag).
+    await until('initial states', () =>
+      states.get('switch.heat_pump_relay')?.state === 'off' &&
+      states.get('sensor.heat_pump_power')?.state === '0' &&
+      states.get('climate.heat_pump')?.state === 'off');
     } finally {
       await engine.stop();
       await sim.stop();

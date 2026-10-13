@@ -19,7 +19,7 @@ jobs:
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 180
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Tools
         run: |
           sudo apt-get update
@@ -38,7 +38,7 @@ jobs:
         run: gh release upload "$GITHUB_REF_NAME" dist/*.img.xz dist/*.sha256 --clobber
       - name: Keep as a workflow artifact
         if: github.event_name != 'release'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sunroost-${{ matrix.target }}
           path: dist/
