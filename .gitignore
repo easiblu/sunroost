@@ -1,11 +1,13 @@
+# Dependencies
 node_modules/
+
+# Local data and configuration (the database, secret.key, logs)
 data/
 config.json
-original product/
-data-sim/
-.DS_Store
-private/
-# Duplicate copies created by Finder/iCloud sync
-* 2.*
+
+# SD-card image builds
 dist/
 .image-cache/
+
+# OS files
+.DS_Store
